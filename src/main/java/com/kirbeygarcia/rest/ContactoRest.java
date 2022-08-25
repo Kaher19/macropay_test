@@ -9,6 +9,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,13 +22,26 @@ import com.kirbeygarcia.service.ContactoService;
 @RestController
 @RequestMapping("/api")
 
-public class ContactosRest {
+public class ContactoRest {
     
     @Autowired
     private ContactoService contactoService;
     
 	@CrossOrigin()
-    @GetMapping("/contactos")
+    @GetMapping("/contacts")
+    public ResponseEntity<Object> getContactos() {
+        Iterable<Contacto> contactos = contactoService.getContactos();
+        return ResponseEntity.status(HttpStatus.OK).body(contactos);
+    }
+    
+    @GetMapping("/contacts")
+    public ResponseEntity<Object> getContactosFiltrados(@RequestHeader("phrase") String busqueda) {
+        Iterable<Contacto> contactos = contactoService.getContactos();
+        return ResponseEntity.status(HttpStatus.OK).body(contactos);
+    }
+
+    @CrossOrigin()
+    @PostMapping("/contact")
     public ResponseEntity<Object> getContactos() {
         Iterable<Contacto> contactos = contactoService.getContactos();
         return ResponseEntity.status(HttpStatus.OK).body(contactos);

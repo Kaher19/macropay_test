@@ -1,5 +1,6 @@
 package com.kirbeygarcia.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,8 @@ public class ContactoService {
         return contacto.get();
     }
 
-    public Contacto findContacto(String phrase) {
-        Optional<Contacto> contacto = contactoRepository.findById(phrase);
-        if (!contacto.isPresent())
-            throw new NotFoundException("No se encontró un usuario con id " +phrase);
-        return contacto.get();
+    public List<Contacto> findContactos(String phrase) {
+        return contactoRepository.findByNameIgnoreCase(phrase);
     }
 
     public Iterable<Contacto> getContactos(){
