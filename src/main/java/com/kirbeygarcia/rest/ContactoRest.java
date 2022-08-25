@@ -20,7 +20,7 @@ import com.kirbeygarcia.model.Contacto;
 import com.kirbeygarcia.service.ContactoService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/")
 
 public class ContactoRest {
     
