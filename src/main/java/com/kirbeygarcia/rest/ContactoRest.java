@@ -35,14 +35,14 @@ public class ContactoRest {
     }
     
     @GetMapping("/contacts")
-    public ResponseEntity<Object> getContactosFiltrados(@RequestHeader("phrase") String busqueda) {
-        Iterable<Contacto> contactos = contactoService.getContactos();
+    public ResponseEntity<Object> getContactosFiltrados(@RequestHeader("phrase") String phrase) {
+        Iterable<Contacto> contactos = contactoService.findContactos(phrase);
         return ResponseEntity.status(HttpStatus.OK).body(contactos);
     }
 
     @CrossOrigin()
     @PostMapping("/contact")
-    public ResponseEntity<Object> getContactos() {
+    public ResponseEntity<Object> postContacto() {
         Iterable<Contacto> contactos = contactoService.getContactos();
         return ResponseEntity.status(HttpStatus.OK).body(contactos);
     }
