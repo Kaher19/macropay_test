@@ -36,6 +36,8 @@ public class ContactoRest {
     
     @GetMapping("/contacts")
     public ResponseEntity<Object> getContactosFiltrados(@RequestHeader("phrase") String phrase) {
+        if(phrase.isBlank() || phrase.isEmpty())
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         Iterable<Contacto> contactos = contactoService.findContactos(phrase);
         return ResponseEntity.status(HttpStatus.OK).body(contactos);
     }
